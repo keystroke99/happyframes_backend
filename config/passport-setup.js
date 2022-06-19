@@ -10,9 +10,9 @@ passport.use(
   new GoogleStrategy(
     {
       // options for strategy
-      callbackURL: 'http://localhost:3000/api/login/google/callback',
-      clientID: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET
+      callbackURL: '/api/login/google/callback',
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
     },
     async (accessToken, refreshToken, profile, done) => {
       const email = profile.emails[0].value;
@@ -32,7 +32,7 @@ passport.use(
 );
 
 passport.use(new FacebookStrategy({
-  callbackURL: 'http://localhost:3000/api/login/facebook/callback',
+  callbackURL: '/api/login/facebook/callback',
   clientID: process.env.FB_CLIENT_ID,
   clientSecret: process.env.FB_SECRENT,
   profileFields: ['id', 'displayName', 'photos', 'email']
