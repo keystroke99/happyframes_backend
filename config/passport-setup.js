@@ -10,7 +10,7 @@ passport.use(
   new GoogleStrategy(
     {
       // options for strategy
-      callbackURL: '/api/login/google/callback',
+      callbackURL: `${process.env.APP_DOMAIN}/api/login/google/callback`,
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     },
@@ -32,7 +32,7 @@ passport.use(
 );
 
 passport.use(new FacebookStrategy({
-  callbackURL: '/api/login/facebook/callback',
+  callbackURL: `${process.env.APP_DOMAIN}/api/login/facebook/callback`,
   clientID: process.env.FB_CLIENT_ID,
   clientSecret: process.env.FB_SECRENT,
   profileFields: ['id', 'displayName', 'photos', 'email']
