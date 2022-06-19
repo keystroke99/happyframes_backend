@@ -5,8 +5,7 @@ let Schema = mongoose.Schema;
 const userSchema = new Schema({
     email: {
         type: String,
-        required: [true, 'email required'],
-        unique: [true, 'email already registered']
+        default:null
     },
     googleId: {
         type: String,
