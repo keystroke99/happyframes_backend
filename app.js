@@ -90,6 +90,6 @@ app.get('/verify', authService.checkTokenMW, (req, res) => {
   }
 });
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log('Express app listening on port 3000!');
 });
