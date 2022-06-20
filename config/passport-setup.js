@@ -41,12 +41,14 @@ passport.use(new FacebookStrategy({
     console.log(profile)
     // check if user already exists
     const currentUser = await User.findOne({ facebookId: profile.id });
+    console.log('==== current user === ', currentUser)
     if (currentUser) {
       // already have the user -> return (login)
       return done(null, currentUser);
     } else {
       // register user and return
       const newUser = await new User({ facebookId: profile.id }).save();
+      console.log('==== new user === ', newUser)
       return done(null, newUser);
     }
   }
