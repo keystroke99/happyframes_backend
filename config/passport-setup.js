@@ -37,7 +37,7 @@ passport.use(new FacebookStrategy({
   clientSecret: process.env.FB_SECRENT,
   profileFields: ['id', 'displayName', 'photos', 'email']
 },
-  async function (accessToken, refreshToken, profile, cb) {
+  async function (accessToken, refreshToken, profile, done) {
     console.log(profile)
     // check if user already exists
     const currentUser = await User.findOne({ facebookId: profile.id });
