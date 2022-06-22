@@ -65,7 +65,8 @@ app.get(
     session: false,
     accessType: "offline",
     approvalPrompt: "force",
-    scope: ['email']
+    scope: ['email'],
+    authType: 'rerequest'
   })
 );
 
