@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 
-
 // check if Token exists on request Header and attach token to request as attribute
 exports.checkTokenMW = (req, res, next) => {
     // Get auth header value
