@@ -82,7 +82,7 @@ app.get(
 // callback url upon successful google authentication
 app.get(
   '/api/login/facebook/callback',
-  passport.authenticate('facebook', { session: false }),
+  passport.authenticate('fbReAuthenticate', { session: false }),
   async (req, res) => {
     if(_.isEmpty(req.user.email) === true && req.user.isFbEmailRegistered === false){
       // remove the user object from DB
