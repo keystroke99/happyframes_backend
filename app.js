@@ -66,14 +66,15 @@ app.get(
   passport.authenticate('facebook', {
     session: false,
     accessType: "offline",
-    approvalPrompt: "force"
+    approvalPrompt: "force",
+    scope: ['email']
   })
 );
 
 // callback url upon successful google authentication
 app.get(
   '/api/login/facebook/callback',
-  passport.authenticate('facebook', { session: false, scope: 'email' }),
+  passport.authenticate('facebook', { session: false }),
   (req, res) => {
     authService.signToken(req, res);
   }
