@@ -73,7 +73,7 @@ app.get(
 // callback url upon successful google authentication
 app.get(
   '/api/login/facebook/callback',
-  passport.authenticate('facebook', { session: false }),
+  passport.authenticate('facebook', { session: false, scope: 'email' }),
   (req, res) => {
     authService.signToken(req, res);
   }
