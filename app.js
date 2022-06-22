@@ -70,17 +70,6 @@ app.get(
   })
 );
 
-app.get(
-  '/auth/facebook/reauthenticate',
-  passport.authenticate('facebook', {
-    session: false,
-    accessType: "offline",
-    approvalPrompt: "force",
-    scope: ['email'],
-    authType: 'rerequest'
-  })
-);
-
 // callback url upon successful google authentication
 app.get(
   '/api/login/facebook/callback',
@@ -88,7 +77,7 @@ app.get(
   async (req, res) => {
     if(_.isEmpty(req.user.email) === true && req.user.isFbEmailRegistered === false){
       // remove the user object from DB
-      await User.deleteOne()
+      await User.deleteOne({_id: req.user.id});
       return res.status(500).json({message: 'your Facbook account is not linked with a valid email. Please allow email access and try again later'});
     }
     authService.signToken(req, res);

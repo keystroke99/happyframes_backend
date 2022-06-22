@@ -39,9 +39,11 @@ passport.use(new FacebookStrategy({
 },
   async function (accessToken, refreshToken, profile, done) {
     console.log(profile)
-    let email = '';
+    let email;
     if('emails' in profile === true){
+      console.log('===== email exist ')
       if(profile.emails.legnth > 0){
+        console.log( profile.emails[0].value)
         email = profile.emails[0].value;
       }
     }
