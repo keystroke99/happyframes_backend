@@ -65,8 +65,17 @@ app.get(
     session: false,
     accessType: "offline",
     approvalPrompt: "force",
+    scope: ['email']
+  })
+);
+
+app.get(
+  '/auth/facebook/reauthenticate',
+  passport.authenticate('fbReAuthenticate', {
+    session: false,
+    accessType: "offline",
+    approvalPrompt: "force",
     scope: ['email'],
-    
   })
 );
 
