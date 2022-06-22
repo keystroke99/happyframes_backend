@@ -8,6 +8,7 @@ const authService = require('./Services/AuthService');
 const passportSetup = require('./config/passport-setup');
 require('dotenv').config();
 const User = mongoose.model('User');
+const _ = require('lodash');
 
 const mongodbUri = process.env.MONGO_URI;
 mongoose.set('useFindAndModify', false);
@@ -64,7 +65,8 @@ app.get(
     session: false,
     accessType: "offline",
     approvalPrompt: "force",
-    scope: ['email']
+    scope: ['email'],
+    
   })
 );
 
@@ -72,10 +74,10 @@ app.get(
 app.get(
   '/api/login/facebook/callback',
   passport.authenticate('facebook', { session: false }),
-  (req, res) => {
+  async (req, res) => {
     if(_.isEmpty(req.user.email) === true && req.user.isFbEmailRegistered === false){
       // remove the user object from DB
-      
+      await User.deleteOne()
       return res.status(500).json({message: 'your Facbook account is not linked with a valid email. Please allow email access and try again later'});
     }
     authService.signToken(req, res);
