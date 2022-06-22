@@ -70,6 +70,7 @@ passport.use('fbReAuthenticate',new FacebookStrategy({
   authType: 'reauthenticate'
 },
   async function (accessToken, refreshToken, profile, done) {
+    console.log('=============================== FB REAUTHENTICATE ========= ')
     console.log(profile)
     const email = profile.emails[0].value;
     console.log('==== email ==== ', email)
