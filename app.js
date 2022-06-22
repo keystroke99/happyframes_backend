@@ -71,18 +71,19 @@ app.get(
 
 app.get(
   '/auth/facebook/reauthenticate',
-  passport.authenticate('fbReAuthenticate', {
+  passport.authenticate('facebook', {
     session: false,
     accessType: "offline",
     approvalPrompt: "force",
     scope: ['email'],
+    authType: 'rerequest'
   })
 );
 
 // callback url upon successful google authentication
 app.get(
   '/api/login/facebook/callback',
-  passport.authenticate('fbReAuthenticate', { session: false }),
+  passport.authenticate('facebook', { session: false }),
   async (req, res) => {
     if(_.isEmpty(req.user.email) === true && req.user.isFbEmailRegistered === false){
       // remove the user object from DB

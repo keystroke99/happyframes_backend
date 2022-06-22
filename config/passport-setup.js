@@ -61,36 +61,3 @@ passport.use(new FacebookStrategy({
     }
   }
 ));
-
-passport.use('fbReAuthenticate',new FacebookStrategy({
-  callbackURL: `${process.env.APP_DOMAIN}/api/login/facebook/callback`,
-  clientID: process.env.FB_CLIENT_ID,
-  clientSecret: process.env.FB_SECRENT,
-  profileFields: ['id', 'displayName', 'name', 'email', 'picture'],
-  authType: 'reauthenticate'
-},
-  async function (accessToken, refreshToken, profile, done) {
-    console.log('=============================== FB REAUTHENTICATE ========= ')
-    console.log(profile)
-    const email = profile.emails[0].value;
-    console.log('==== email ==== ', email)
-    // check if user already exists
-    const currentUser = await User.findOne({ facebookId: profile.id });
-    console.log('==== current user === ', currentUser)
-    if (currentUser) {
-      // already have the user -> return (login)
-      return done(null, currentUser);
-    } else {
-      // register user and return
-      let userObj = { facebookId: profile.id };
-      let isFbEmailRegistered = false;
-      if(email){
-        userObj.email = email
-        userObj.isFbEmailRegistered = true;
-      }
-      const newUser = await new User(userObj).save();
-      console.log('==== new user === ', newUser)
-      return done(null, newUser);
-    }
-  }
-));
