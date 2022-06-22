@@ -15,7 +15,7 @@ exports.checkTokenMW = (req, res, next) => {
 
 // Verify Token validity and attach token data as request attribute
 exports.verifyToken = (req, res) => {
-    jwt.verify(req.token, 'secretkey', (err, authData) => {
+    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
         if (err) {
             res.sendStatus(403);
         } else {
@@ -27,7 +27,7 @@ exports.verifyToken = (req, res) => {
 // Issue Token
 exports.signToken = (req, res) => {
     console.log(req.user)
-    jwt.sign({ userId: req.user._id }, 'secretkey', { expiresIn: '5 min' }, (err, token) => {
+    jwt.sign({ userId: req.user._id, email: req.user.email, isFbEmailRegistered: req.user.isFbEmailRegistered }, process.env.JWT_SECRET, { expiresIn: '5 min' }, (err, token) => {
         if (err) {
             res.sendStatus(500);
         } else {

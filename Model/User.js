@@ -5,7 +5,7 @@ let Schema = mongoose.Schema;
 const userSchema = new Schema({
     email: {
         type: String,
-        default:null
+        default: null
     },
     googleId: {
         type: String,
@@ -14,6 +14,9 @@ const userSchema = new Schema({
     facebookId: {
         type: String,
         default: null
+    },
+    isFbEmailRegistered: {
+        type: Boolean
     }
 });
 

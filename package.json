@@ -11,27 +11,16 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "connect-flash": "*",
     "dotenv": "^8.2.0",
     "express": "^4.16.2",
-    "express-handlebars": "*",
-    "express-messages": "*",
-    "express-session": "*",
-    "express-validator": "*",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.3.2",
+    "lodash": "^4.17.21",
     "mongoose": "^5.7.1",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
-    "passport-google-oauth20": "^2.0.0",
-    "pem": "^1.14.6"
+    "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
-    "concurrently": "^5.1.0",
-    "css-loader": "^3.4.2",
-    "nodemon": "^2.0.2",
-    "pushover-notifications": "^1.2.2",
-    "webpack": "^4.41.5"
   },
   "engines": {
     "node": "14.x"

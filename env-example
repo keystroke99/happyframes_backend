@@ -1,3 +1,7 @@
-CLIENT_ID=''
-CLIENT_SECRET=''
-MONGO_URI=''
+GOOGLE_CLIENT_ID = 'xxxxxxxxxx'
+GOOGLE_CLIENT_SECRET = 'xxxxxxxxxxxxx'
+MONGO_URI = 'xxxxxxxxxxxx'
+FB_CLIENT_ID = 111111111111111111
+FB_SECRENT = 'xxxxxxxxxxxxxxx'
+APP_DOMAIN= 'http://localhost:3000'
+JWT_SECRET = 'xxxxxxx'

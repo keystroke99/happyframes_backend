@@ -30,10 +30,6 @@ app.use(passport.initialize());
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(express.static(__dirname + '/'));
-app.use(function (err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
 
 // ############# GOOGLE AUTHENTICATION ################
 // this will call passport-setup.js authentication in the config directory
@@ -89,6 +85,11 @@ app.get('/verify', authService.checkTokenMW, (req, res) => {
   } else {
     res.json(req.authData);
   }
+});
+
+app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
 app.listen(process.env.PORT || 3000, function () {
