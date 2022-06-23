@@ -56,8 +56,8 @@ passport.use(new FacebookStrategy({
       let userObj = { facebookId: profile.id };
       let isFbEmailRegistered = false;
       if(email){
-        userObj.email = email
-        userObj.isFbEmailRegistered = true;
+        isFbEmailRegistered = true;
+        userObj.email = email;
       }
       userObj.isFbEmailRegistered = isFbEmailRegistered;
       const newUser = await new User(userObj).save();
