@@ -5,3 +5,6 @@ FB_CLIENT_ID = 111111111111111111
 FB_SECRENT = 'xxxxxxxxxxxxxxx'
 APP_DOMAIN= 'http://localhost:3000'
 JWT_SECRET = 'xxxxxxx'
+JWT_EXPIRY = '10 min'
+MAILGUN_API_KEY = 'xxxxxxxxxxxxxxxx'
+MAILGUN_API_DOMAIN = 'xxxxxxxxxxxxxxxxxxxx'

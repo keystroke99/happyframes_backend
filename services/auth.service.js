@@ -26,7 +26,7 @@ exports.verifyToken = (req, res) => {
 // Issue Token
 exports.signToken = (req, res) => {
     console.log(req.user)
-    jwt.sign({ userId: req.user._id, email: req.user.email, isFbEmailRegistered: req.user.isFbEmailRegistered }, process.env.JWT_SECRET, { expiresIn: '5 min' }, (err, token) => {
+    jwt.sign({ userId: req.user._id, email: req.user.email, isFbEmailRegistered: req.user.isFbEmailRegistered }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRY }, (err, token) => {
         if (err) {
             res.sendStatus(500);
         } else {

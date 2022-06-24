@@ -17,6 +17,9 @@ const userSchema = new Schema({
     },
     isFbEmailRegistered: {
         type: Boolean
+    },
+    otpCode:{
+        type: Number
     }
 });
 

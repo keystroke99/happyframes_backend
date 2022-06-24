@@ -1,14 +1,15 @@
 const express = require('express');
 const app = express();
-require('./Model/User');
+require('./models/user.model');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const authService = require('./Services/AuthService');
+const authService = require('./services/auth.service');
 const passportSetup = require('./config/passport-setup');
 require('dotenv').config();
 const User = mongoose.model('User');
 const _ = require('lodash');
+const authRoutes = require('./routes/auth.routes');
 
 const mongodbUri = process.env.MONGO_URI;
 mongoose.set('useFindAndModify', false);
@@ -40,49 +41,7 @@ app.get('/', (req, res) => {
   res.send('<h1>Hello World</h1>');
 });
 
-app.get(
-  '/auth/google',
-  passport.authenticate('google', {
-    session: false,
-    scope: ["profile", "email"],
-    accessType: "offline",
-    approvalPrompt: "force"
-  })
-);
-
-// callback url upon successful google authentication
-app.get(
-  '/api/login/google/callback',
-  passport.authenticate('google', { session: false }),
-  (req, res) => {
-    authService.signToken(req, res);
-  }
-);
-
-app.get(
-  '/auth/facebook',
-  passport.authenticate('facebook', {
-    session: false,
-    accessType: "offline",
-    approvalPrompt: "force",
-    scope: ['email'],
-    authType: 'rerequest'
-  })
-);
-
-// callback url upon successful google authentication
-app.get(
-  '/api/login/facebook/callback',
-  passport.authenticate('facebook', { session: false }),
-  async (req, res) => {
-    if(_.isEmpty(req.user.email) === true && req.user.isFbEmailRegistered === false){
-      // remove the user object from DB
-      await User.deleteOne({_id: req.user.id});
-      return res.status(500).json({message: 'your Facbook account is not linked with a valid email. Please allow email access and try again later'});
-    }
-    authService.signToken(req, res);
-  }
-);
+app.use('/auth', authRoutes)
 
 // route to check token with postman.
 // using middleware to check for authorization header
